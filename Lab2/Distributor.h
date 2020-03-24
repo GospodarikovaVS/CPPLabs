@@ -1,13 +1,19 @@
 #pragma once
+#include <vector>
+#include "Shelf.h"
+
 class Distributor
 {
 public:
-	virtual double getProfit() = 0;
-	virtual int sell() = 0;
+	int buyProducts(int number, Product prod);
+	double getProfit();
+	double getDefBalance();
+	int sell(double balance, Product prod);
 
-private:
-	const double defBudget;
-	const float perMinAcceptLvl;
-
+protected:
+	std::vector<Shelf> shelves; //map with counting
+	double defBalance;
+	double curBalance;
+	float perMinAcceptLvl;
 };
 

@@ -6,46 +6,14 @@
 class TradeOrg
 {
 public:
-	int orderProducts(int reqNumber, Product prod) {
-		return BuyProducts(reqNumber, prod);
-	}
-	void addDistributor(Distributor distr) {
-		distributors.push_back(distr);
-		Budget -= distr.
-	}
-	//double reqInvestment(double investment) { //there is nothing usefull
-	//	if (Budget > investment) {
-	//		Budget -= investment;
-	//		return investment;
-	//	}
-	//}
+	int orderProducts(int reqNumber, Product prod);
+	void addDistributor(Distributor distr);
 
 private:
-	double Budget;
+	double Balance;
 	std::vector<Distributor> distributors;
-
-	void collectProfit() {
-		for(Distributor distr : distributors)
-		{
-			//Budget += distr.getProfit();
-		}
-	}
-	int BuyProducts(int number, Product prod) {
-		int numReal = number;
-		if (Budget >= numReal * prod.price)
-			Budget -= numReal * prod.price;
-		else {
-			collectProfit();
-			if (Budget >= numReal * prod.price)
-				Budget -= numReal * prod.price;
-			else {
-				numReal = (int)Budget / (int)prod.price;
-				Budget -= numReal * prod.price;
-			}
-		}
-		//order truck, which will deliver products(MayBe in storage with buffer)
-		return numReal;
-	}
+	void collectProfit();
+	int BuyProducts(int number, Product prod);
 	
 };
 

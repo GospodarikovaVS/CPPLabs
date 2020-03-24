@@ -7,25 +7,11 @@ class Store :
 	public Distributor
 {
 public:
+	Store();
 
 private:
-	std::vector<Shelf> shelfs;
+	const double defBalance = 1000.0;
 
-	double buyProducts(int number, Product prod) {
-		int numReal = number;
-		if (Budget >= numReal * prod.price)
-			Budget -= numReal * prod.price;
-		else {
-			collectProfit();
-			if (Budget >= numReal * prod.price)
-				Budget -= numReal * prod.price;
-			else {
-				numReal = (int)Budget / (int)prod.price;
-				Budget -= numReal * prod.price;
-			}
-		}
-		//order truck, which will deliver products(MayBe in storage with buffer)
-		return numReal;
-	}
+	
 };
 
