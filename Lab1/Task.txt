@@ -1,0 +1,12 @@
+Task description:
+
+Write C++ function, which can parse string on a whitespases with concrete format.
+
+Format function calling: our_func(input_str, length, str_format, {output_params}); 
+Format function signature: int our_func(const char* input, size_t length, const char* format, {designators to out_var}).
+
+Function contract: 
+Function gets char* and parse this on white spaces with given length. 
+Then it writes into output parametrs corresponding values.
+
+https://docs.microsoft.com/ru-ru/cpp/c-runtime-library/reference/snscanf-snscanf-l-snwscanf-snwscanf-l?view=vs-2019

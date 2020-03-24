@@ -1,0 +1,21 @@
+// Lab1.cpp: определяет точку входа для консольного приложения.
+// crt_snscanf.c
+// compile with: /W3
+
+#include "stdafx.h"
+#include <stdio.h>
+
+int main()
+{
+	char str1[] = "15 fr,eeee 12 14...";
+	char s1[3];
+	wchar_t s2[4];
+	int i = 2, in;
+	float fp;
+
+	i = _snscanf(str1, 16, "%s %s %d %f", s1, s2, &in, &fp);
+	printf("_snscanf converted %d fields: ", i);
+	printf("%s and %s and %d and %f\n", s1, s2, in, fp);
+
+	return 0;
+}
