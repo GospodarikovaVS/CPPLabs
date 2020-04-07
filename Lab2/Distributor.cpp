@@ -1,7 +1,7 @@
 #include "Distributor.h"
-#include "Product.h"
+#include "VendorCode.h"
 
-int Distributor::sell(double budget, Product prod) {
+int Distributor::sell(double budget, VendorCode vc) {
 	int count = 0;
 
 	return count;
@@ -17,10 +17,11 @@ double Distributor::getProfit() {
 	return profit;
 }
 
-int Distributor::buyProducts(int number, Product prod) {
+int Distributor::buyProducts(int number, VendorCode vc) {
+	int numReal = 0;
 	for (Shelf shelf : shelves)
 	{
-		if(shelf.checkType(prod))
+		if (shelf.checkType(vc));
 	}
 	//order truck, which will deliver products(MayBe in storage with buffer)
 	return numReal;

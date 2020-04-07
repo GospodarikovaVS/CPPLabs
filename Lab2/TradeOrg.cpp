@@ -5,8 +5,8 @@
 TradeOrg::TradeOrg() {
 }
 
-int TradeOrg::orderProducts(int reqNumber, Product prod) {
-return BuyProducts(reqNumber, prod);
+int TradeOrg::orderProducts(int reqNumber, VendorCode vc) {
+return BuyProducts(reqNumber, vc);
 }
 
 void TradeOrg::addDistributor(Distributor distr) {
@@ -14,17 +14,17 @@ void TradeOrg::addDistributor(Distributor distr) {
 	Balance -= distr.getDefBalance();
 }
 
-int TradeOrg::BuyProducts(int number, Product prod) {
+int TradeOrg::BuyProducts(int number, VendorCode vc) {
 	int numReal = number;
-	if (Balance >= prod.buyShares(numReal))
-		Balance -= prod.buyShares(numReal);
+	if (Balance >= vc.buyShares(numReal))
+		Balance -= vc.buyShares(numReal);
 	else {
 		collectProfit();
-		if (Balance >= prod.buyShares(numReal))
-			Balance -= prod.buyShares(numReal);
+		if (Balance >= vc.buyShares(numReal))
+			Balance -= vc.buyShares(numReal);
 		else {
-			numReal = (int)Balance / (int)prod.getPrice();
-			Balance -= prod.buyShares(numReal);
+			numReal = (int)Balance / (int)vc.getPrice();
+			Balance -= vc.buyShares(numReal);
 		}
 	}
 	//order truck, which will deliver products(MayBe in storage with buffer)

@@ -1,6 +1,6 @@
 #pragma once
 #include "Distributor.h"
-#include "Product.h"
+#include "VendorCode.h"
 #include <vector>
 #include "Shelf.h"
 class Store :

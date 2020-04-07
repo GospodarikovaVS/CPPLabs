@@ -1,19 +1,19 @@
 #pragma once
 #include <vector>
 #include "Distributor.h"
-#include "Product.h"
+#include "VendorCode.h"
 
 class TradeOrg
 {
 public:
-	int orderProducts(int reqNumber, Product prod);
+	int orderProducts(int reqNumber, VendorCode vc);
 	void addDistributor(Distributor distr);
 
 private:
 	double Balance;
 	std::vector<Distributor> distributors;
 	void collectProfit();
-	int BuyProducts(int number, Product prod);
+	int BuyProducts(int number, VendorCode vc);
 	
 };
 

@@ -1,17 +1,17 @@
 #pragma once
 #include <vector>
-#include "Shelf.h"
+#include "VCSet.h"
 
 class Distributor
 {
 public:
-	int buyProducts(int number, Product prod);
+	int buyProducts(int number, VendorCode vc);
 	double getProfit();
 	double getDefBalance();
-	int sell(double balance, Product prod);
+	int sell(double balance, VendorCode vc);
 
 protected:
-	std::vector<Shelf> shelves; //map with counting
+	std::vector<VCSet> vcSets; 
 	double defBalance;
 	double curBalance;
 	float perMinAcceptLvl;
