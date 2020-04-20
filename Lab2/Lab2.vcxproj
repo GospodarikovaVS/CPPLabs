@@ -154,8 +154,9 @@
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Distributor.cpp" />
     <ClCompile Include="Lab2.cpp" />
+    <ClCompile Include="Storage.cpp" />
+    <ClCompile Include="VCSet.cpp" />
     <ClCompile Include="VendorCode.cpp" />
-    <ClCompile Include="Shelf.cpp" />
     <ClCompile Include="Store.cpp" />
     <ClCompile Include="Supplier.cpp" />
     <ClCompile Include="TradeOrg.cpp" />
@@ -167,8 +168,9 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="Distributor.h" />
+    <ClInclude Include="Storage.h" />
+    <ClInclude Include="VCSet.h" />
     <ClInclude Include="VendorCode.h" />
-    <ClInclude Include="Shelf.h" />
     <ClInclude Include="Store.h" />
     <ClInclude Include="Supplier.h" />
     <ClInclude Include="TradeOrg.h" />

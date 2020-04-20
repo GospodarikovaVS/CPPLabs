@@ -2,8 +2,8 @@
 #include <vector>
 #include "Distributor.h"
 
-TradeOrg::TradeOrg() {
-}
+//TradeOrg::TradeOrg() {
+//}
 
 int TradeOrg::orderProducts(int reqNumber, VendorCode vc) {
 return BuyProducts(reqNumber, vc);
@@ -16,7 +16,7 @@ void TradeOrg::addDistributor(Distributor distr) {
 
 int TradeOrg::BuyProducts(int number, VendorCode vc) {
 	int numReal = number;
-	if (Balance >= vc.buyShares(numReal))
+	/*if (Balance >= vc.buyShares(numReal))
 		Balance -= vc.buyShares(numReal);
 	else {
 		collectProfit();
@@ -26,7 +26,7 @@ int TradeOrg::BuyProducts(int number, VendorCode vc) {
 			numReal = (int)Balance / (int)vc.getPrice();
 			Balance -= vc.buyShares(numReal);
 		}
-	}
+	}*/
 	//order truck, which will deliver products(MayBe in storage with buffer)
 	return numReal;
 }

@@ -5,15 +5,19 @@
 class Distributor
 {
 public:
-	int buyProducts(int number, VendorCode vc);
-	double getProfit();
-	double getDefBalance();
-	int sell(double balance, VendorCode vc);
+	int orderProducts(int number, VendorCode vc);
+	void addVCSet(VCSet vcs);
+	void addVCSet(VendorCode vc, int amount, double price);
+	virtual double calculateSum(int numReal, VendorCode vc) = 0;
+	virtual double getProfit() = 0;
+	virtual void sell(VendorCode vc, int amount) = 0;
+
+	//void changeCurBalance(double changing);
+	//double getCurBalance();
 
 protected:
-	std::vector<VCSet> vcSets; 
-	double defBalance;
 	double curBalance;
+	std::vector<VCSet> vcSets;
 	float perMinAcceptLvl;
 };
 

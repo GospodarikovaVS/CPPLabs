@@ -1,28 +1,21 @@
 #include "Distributor.h"
 #include "VendorCode.h"
 
-int Distributor::sell(double budget, VendorCode vc) {
-	int count = 0;
 
-	return count;
-}
 
-double Distributor::getDefBalance() {
-	return defBalance;
-}
 
-double Distributor::getProfit() {
-	double profit = curBalance - defBalance;
-	curBalance = defBalance;
-	return profit;
-}
-
-int Distributor::buyProducts(int number, VendorCode vc) {
+int Distributor::orderProducts(int number, VendorCode vc) {
 	int numReal = 0;
-	for (Shelf shelf : shelves)
+	for (VCSet vcs : vcSets)
 	{
-		if (shelf.checkType(vc));
+		if (vcs.checkType(vc))
+			numReal = (vcs.getCurAmount()>=number) ? number : vcs.getCurAmount();
 	}
-	//order truck, which will deliver products(MayBe in storage with buffer)
 	return numReal;
+}
+void Distributor::addVCSet(VCSet vcs) {
+	vcSets.push_back(vcs);
+}
+void Distributor::addVCSet(VendorCode vc, int amount, double price) {
+	vcSets.push_back(VCSet(vc, amount, price));
 }

@@ -36,10 +36,13 @@
     <ClCompile Include="Store.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shelf.cpp">
+    <ClCompile Include="VendorCode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VendorCode.cpp">
+    <ClCompile Include="VCSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,10 +68,13 @@
     <ClInclude Include="Store.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shelf.h">
+    <ClInclude Include="VendorCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VendorCode.h">
+    <ClInclude Include="VCSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

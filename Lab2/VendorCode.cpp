@@ -54,13 +54,6 @@ VendorCode::VendorCode(std::string newTitle) {
 	this->volume = NULL;
 }
 
-std::string VendorCode::getTitle() {
-	return title;
-}
-
-void VendorCode::setTitle(std::string newTitle) {
-	title = newTitle;
-}
 
 bool VendorCode::getVolWeightParams(double* weight, double* volume) {
 	if (byWeight)
@@ -70,3 +63,60 @@ bool VendorCode::getVolWeightParams(double* weight, double* volume) {
 	return byWeight;
 }
 
+std::string  VendorCode::getCodeSKU() 
+{
+	return codeSKU;
+}
+std::string  VendorCode::getTitle()
+{
+	return title;
+}
+std::string  VendorCode::getColor()
+{
+	return color;
+}
+std::string  VendorCode::getDescription()
+{
+	return desribtion;
+}
+bool  VendorCode::getIsLiquid()
+{
+	return isLiquid;
+}
+bool  VendorCode::getFragility()
+{
+	return fragility;
+}
+
+
+void VendorCode::setTitle(std::string newTitle) {
+	title = newTitle;
+}
+void VendorCode::setVolume(double volume)
+{
+	this->volume = volume;
+}
+void VendorCode::setWeight(double weight)
+{
+	this->weight = weight;
+}
+void VendorCode::setByWeight(bool byWeight)
+{
+	this->byWeight = byWeight;
+}
+void VendorCode::setIsLiquid(bool isLiquid)
+{
+	this->isLiquid = isLiquid;
+}
+void VendorCode::setColor(std::string color)
+{
+	this->color = color;
+}
+void VendorCode::setFragility(bool fragility)
+{
+	this->fragility = fragility;
+}
+void VendorCode::setDescription(std::string description)
+{
+	this->desribtion = description;
+}
