@@ -1,25 +1,25 @@
 #pragma once
 #include "Distributor.h"
-#include "Store.h"
+#include "TradeOrg.h"
 
 class Storage :
 	public Distributor
 {
 public:
-	Storage(std::vector<Store*> strs);
-	void addSubsidaryStore(Store* store);
-	double calculateSum(int numReal, VendorCode vc) override;
+	Storage(TradeOrg* trOrg);
+	double calculateSum(double numReal, VendorCode vc) override;
 	double getProfit() override;
-	void sell(VendorCode vc, int amount) override;
-	double getDefBalance();
+	void sell(VendorCode vc, double amount) override;
+	double getDefBalance() override;
 	double getPerExtraCharge();
-	int deliverVCSToStore(VendorCode vc, int amountOrdered);
+	double deliverVCSToStore(VendorCode vc, double amountOrdered);
 
 
 private:
 	const double defBalance = 10000.0;
 	const double perExtraCharge = 0.025;
-	std::vector<Store*> subsidiaryStores;
+	TradeOrg* prntTrOrg;
+	void orderVCS(VendorCode vc, double amountOrdered);
 
 };
 

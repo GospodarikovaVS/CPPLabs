@@ -1,12 +1,13 @@
 #include "TradeOrg.h"
 #include <vector>
 #include "Distributor.h"
+#include "Store.h"
+#include "Storage.h"
 
-//TradeOrg::TradeOrg() {
-//}
 
-int TradeOrg::orderProducts(int reqNumber, VendorCode vc) {
-return BuyProducts(reqNumber, vc);
+double TradeOrg::orderVCS(VendorCode vc, double amountOrdered) {
+
+	return 0.0;
 }
 
 void TradeOrg::addDistributor(Distributor distr) {
@@ -14,20 +15,16 @@ void TradeOrg::addDistributor(Distributor distr) {
 	Balance -= distr.getDefBalance();
 }
 
-int TradeOrg::BuyProducts(int number, VendorCode vc) {
-	int numReal = number;
-	/*if (Balance >= vc.buyShares(numReal))
-		Balance -= vc.buyShares(numReal);
-	else {
-		collectProfit();
-		if (Balance >= vc.buyShares(numReal))
-			Balance -= vc.buyShares(numReal);
-		else {
-			numReal = (int)Balance / (int)vc.getPrice();
-			Balance -= vc.buyShares(numReal);
-		}
-	}*/
-	//order truck, which will deliver products(MayBe in storage with buffer)
+double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double balance, bool wholeSale) {
+	double numReal = amountOrdered;
+	//search of distr
+	for (Distributor dist : distributors)
+	{
+		//if(wholeSale && decltype(dist) == Store)
+	}
+	//order
+	//price
+	
 	return numReal;
 }
 

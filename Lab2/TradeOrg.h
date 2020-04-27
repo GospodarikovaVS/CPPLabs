@@ -6,14 +6,14 @@
 class TradeOrg
 {
 public:
-	int orderProducts(int reqNumber, VendorCode vc);
+	double orderVCS(VendorCode vc, double amountOrdered);
 	void addDistributor(Distributor distr);
+	double BuyProducts(VendorCode vc, double amountOrdered, double balance, bool wholeSale);
 
 private:
 	double Balance;
 	std::vector<Distributor> distributors;
 	void collectProfit();
-	int BuyProducts(int number, VendorCode vc);
 	
 };
 

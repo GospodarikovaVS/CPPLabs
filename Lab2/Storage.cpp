@@ -1,11 +1,12 @@
 #include "Storage.h"
 #include <vector>
 
-Storage::Storage(std::vector<Store*> strs) {
+Storage::Storage(TradeOrg* trOrg) {
 	this->curBalance = this->defBalance;
-	subsidiaryStores = strs;
+	vcSets = std::vector<VCSet>();
+	prntTrOrg = trOrg;
 }
-double Storage::calculateSum(int numReal, VendorCode vc) {
+double Storage::calculateSum(double numReal, VendorCode vc) {
 	double price = 0;
 	for (VCSet vcs : vcSets)
 	{
@@ -26,32 +27,32 @@ double Storage::getProfit() {
 	curBalance = defBalance;
 	return profit;
 }
-void Storage::sell(VendorCode vc, int amount) {
+void Storage::sell(VendorCode vc, double amount) {
 	for (VCSet vcs : vcSets)
 	{
 		if (vcs.checkType(vc))
 			vcs.increaseAmount(-amount);
 	}
-	//order truck, which will deliver products(MayBe in storage with buffer)
-}
-void Storage::addSubsidaryStore(Store* store) {
-	subsidiaryStores.push_back(store);
+	orderVCS(vc, amount);
 }
 
-int Storage::deliverVCSToStore(VendorCode vc, int amountOrdered) {
+double Storage::deliverVCSToStore(VendorCode vc, double amountOrdered) {
 	for (VCSet vcs : vcSets)
 	{
 		if (vcs.checkType(vc))
 		{
-			if (amountOrdered <= vcs.getCurAmount)
+			if (amountOrdered <= vcs.getCurAmount())
 			{
 				vcs.increaseAmount(-amountOrdered);
 				return amountOrdered;
 			}
 			else {
-				vcs.increaseAmount(-vcs.getCurAmount);
-				return vcs.getCurAmount;
+				vcs.increaseAmount(-vcs.getCurAmount());
+				return vcs.getCurAmount();
 			}
 		}
 	}
+}
+void Storage::orderVCS(VendorCode vc, double amountOrdered) {
+	prntTrOrg->orderVCS(vc, amountOrdered);
 }

@@ -5,12 +5,13 @@
 class Distributor
 {
 public:
-	int orderProducts(int number, VendorCode vc);
+	double orderProducts(double number, VendorCode vc);
 	void addVCSet(VCSet vcs);
-	void addVCSet(VendorCode vc, int amount, double price);
-	virtual double calculateSum(int numReal, VendorCode vc) = 0;
-	virtual double getProfit() = 0;
-	virtual void sell(VendorCode vc, int amount) = 0;
+	void addVCSet(VendorCode vc, double amount, double price);
+	virtual double calculateSum(double numReal, VendorCode vc);
+	virtual double getProfit();
+	virtual void sell(VendorCode vc, double amount);
+	virtual double getDefBalance();
 
 	//void changeCurBalance(double changing);
 	//double getCurBalance();

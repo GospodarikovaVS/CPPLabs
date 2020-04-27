@@ -3,13 +3,15 @@
 Store::Store(Storage* prStrg) {
 	this -> curBalance = this -> defBalance;
 	parentStorage = prStrg;
+	vcSets = std::vector<VCSet>();
 }
 
-void Store::sell(VendorCode vc, int amount) {
+void Store::sell(VendorCode vc, double amount) {
 	for (VCSet vcs : vcSets)
 	{
 		if (vcs.checkType(vc))
 			vcs.increaseAmount(-amount);
+
 		replenishVCS(&vcs);
 	}
 }
@@ -18,9 +20,9 @@ Storage* Store::getParentStorage() {
 }
 
 void Store::replenishVCS(VCSet* vcs) {
-	int amount = parentStorage->
-		deliverVCSToStore(vcs->getVC,
-			vcs->getDefAmount - vcs->getCurAmount);
+	double amount = parentStorage->
+		deliverVCSToStore(vcs->getVC(),
+			vcs->getDefAmount() - vcs->getCurAmount());
 	vcs->increaseAmount(amount);
 }
 
@@ -33,7 +35,7 @@ double Store::getPerExtraCharge() {
 void Store::setParentStorage(Storage* prntStrg) {
 	parentStorage = prntStrg;
 }
-double Store::calculateSum(int numReal, VendorCode vc) {
+double Store::calculateSum(double numReal, VendorCode vc) {
 	double price = 0;
 	for (VCSet vcs : vcSets)
 	{

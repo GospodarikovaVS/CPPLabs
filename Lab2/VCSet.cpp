@@ -1,16 +1,12 @@
 #include "VCSet.h"
 #include "VendorCode.h"
 
-VCSet::VCSet(VendorCode vc, int amount, double price)
+VCSet::VCSet(VendorCode vc, double amount, double price)
 {
 	this->vc = vc;
 	this->amount = amount;
 	this->defAmount = amount;
 	this -> price = price;
-}
-int VCSet::buyAmount(int amount)
-{
-	return 1;
 }
 VendorCode VCSet::getVC()
 {
@@ -24,20 +20,20 @@ double VCSet::getPrice()
 {
 	return price;
 }
-int VCSet::getCurAmount()
+double VCSet::getCurAmount()
 {
 	return amount;
 }
-int VCSet::getDefAmount()
+double VCSet::getDefAmount()
 {
 	return defAmount;
 }
-void VCSet::increaseAmount(int increasment)
+void VCSet::increaseAmount(double increasment)
 {
 	this->amount += increasment;
 }
 
 bool VCSet::checkType(VendorCode vc)
 {
-	return vc.getCodeSKU == this->vc.getCodeSKU;
+	return vc.getCodeSKU() == this->vc.getCodeSKU();
 }

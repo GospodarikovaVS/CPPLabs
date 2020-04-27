@@ -3,21 +3,20 @@
 class VCSet
 {
 public:
-	VCSet(VendorCode vc, int amount, double price);
-	int buyAmount(int amount);
+	VCSet(VendorCode vc, double amount, double price);
 	VendorCode getVC();
 	void setPrice(double price);
 	double getPrice();
-	int getCurAmount();
-	int getDefAmount();
-	void increaseAmount(int increasment);
+	double getCurAmount();
+	double getDefAmount();
+	void increaseAmount(double increasment);
 	bool checkType(VendorCode vc);
 
 
 private:
 	VendorCode vc;
 	double price; // если на развес - за кг/литр, иначе за штуку
-	int amount; // количество штук или кг/литров
-	int defAmount; // количество штук или кг/литров по-умолчанию
+	double amount; // количество штук или кг/литров
+	double defAmount; // количество штук или кг/литров по-умолчанию
 };
 
