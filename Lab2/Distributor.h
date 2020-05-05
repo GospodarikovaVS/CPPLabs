@@ -7,6 +7,7 @@ class Distributor
 public:
 	double orderProducts(double number, VendorCode vc);
 	void addVCSet(VCSet vcs);
+	bool checkAvailabilityVC(VendorCode vc);
 	void addVCSet(VendorCode vc, double amount, double price);
 	virtual double calculateSum(double numReal, VendorCode vc);
 	virtual double getProfit();

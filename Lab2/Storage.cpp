@@ -31,9 +31,12 @@ void Storage::sell(VendorCode vc, double amount) {
 	for (VCSet vcs : vcSets)
 	{
 		if (vcs.checkType(vc))
+		{
 			vcs.increaseAmount(-amount);
+			orderVCS(vc, amount);
+			return;
+		}
 	}
-	orderVCS(vc, amount);
 }
 
 double Storage::deliverVCSToStore(VendorCode vc, double amountOrdered) {

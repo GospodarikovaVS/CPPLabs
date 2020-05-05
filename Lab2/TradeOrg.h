@@ -7,12 +7,12 @@ class TradeOrg
 {
 public:
 	double orderVCS(VendorCode vc, double amountOrdered);
-	void addDistributor(Distributor distr);
-	double BuyProducts(VendorCode vc, double amountOrdered, double balance, bool wholeSale);
+	void addDistributor(Distributor* distr);
+	double BuyProducts(VendorCode vc, double amountOrdered, double* balance, bool wholeSale);
 
 private:
 	double Balance;
-	std::vector<Distributor> distributors;
+	std::vector<Distributor*> distributors;
 	void collectProfit();
 	
 };

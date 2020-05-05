@@ -13,6 +13,14 @@ double Distributor::orderProducts(double number, VendorCode vc) {
 double Distributor::getDefBalance() {
 	return 0.0;
 }
+bool Distributor::checkAvailabilityVC(VendorCode vc) {
+	for (VCSet vcs : vcSets)
+	{
+		if (vcs.checkType(vc) && (vcs.getCurAmount() > 0))
+			return true;
+	}
+	return false;
+}
 void Distributor::addVCSet(VCSet vcs) {
 	vcSets.push_back(vcs);
 }

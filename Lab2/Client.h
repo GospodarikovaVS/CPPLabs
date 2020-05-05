@@ -4,7 +4,7 @@
 class Client
 {
 public:
-	Client(double balance);
+	Client(double balance, bool wholeSale);
 	double buyVC(VendorCode vc, double amount, double balance, TradeOrg trOrg);
 
 private:
