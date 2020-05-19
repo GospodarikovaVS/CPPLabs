@@ -13,13 +13,13 @@ public:
 	double getDefBalance() override;
 	double getPerExtraCharge();
 	double deliverVCSToStore(VendorCode vc, double amountOrdered);
+	void orderVCS(VendorCode vc, double amountOrdered);
 
 
 private:
 	const double defBalance = 10000.0;
 	const double perExtraCharge = 0.025;
 	TradeOrg* prntTrOrg;
-	void orderVCS(VendorCode vc, double amountOrdered);
 
 };
 

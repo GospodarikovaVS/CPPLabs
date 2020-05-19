@@ -14,6 +14,7 @@ public:
 	double calculateSum(double numReal, VendorCode vc) override;
 	void sell(VendorCode vc, double amount) override;
 	void replenishVCS(VCSet* vcs);
+	void replenishVCS(VCSet* vcs, double amountToOrdering);
 	double getProfit() override;
 	double getDefBalance() override;
 	double getPerExtraCharge();

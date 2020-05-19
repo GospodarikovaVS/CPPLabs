@@ -6,7 +6,7 @@ class Distributor
 {
 public:
 	double orderProducts(double number, VendorCode vc);
-	void addVCSet(VCSet vcs);
+	void addVCSet(VCSet* vcs);
 	bool checkAvailabilityVC(VendorCode vc);
 	void addVCSet(VendorCode vc, double amount, double price);
 	virtual double calculateSum(double numReal, VendorCode vc);
@@ -19,7 +19,7 @@ public:
 
 protected:
 	double curBalance;
-	std::vector<VCSet> vcSets;
+	std::vector<VCSet*> vcSets;
 	float perMinAcceptLvl;
 };
 

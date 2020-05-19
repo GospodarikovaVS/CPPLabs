@@ -2,12 +2,35 @@
 //
 #include "Client.h"
 #include "TradeOrg.h"
-
+#include "Store.h"
 
 #include <iostream>
 
 int main()
 {
+	TradeOrg trOrg = TradeOrg(1000000);
+	Storage strg = Storage(&trOrg);
+	Store str = Store(&strg);
+	Client notWholeSaleClient = Client(10000, false);
+	VendorCode vc = VendorCode("Молоко", 0.9, 1, true, false);
+	trOrg.addDistributor(&strg);
+	trOrg.addDistributor(&str);
+	VCSet vcStrg = VCSet(vc, 50, 100);
+	VCSet vcStr = VCSet(vc, 5, 100);
+	strg.addVCSet(&vcStrg);
+	str.addVCSet(&vcStr);
+	strg.orderVCS(vc, 50);
+	str.replenishVCS(&vcStr, 5);
+
+
+	std::cout << (vcStr.getCurAmount()) << "\n";
+	std::cout << (vcStrg.getCurAmount()) << "\n";
+	std::cout << (notWholeSaleClient.getBalance()) << "\n";
+	std::cout << (notWholeSaleClient.buyVC(vc, 80, &trOrg)) << "\n";
+	std::cout << (vcStr.getCurAmount()) << "\n";
+	std::cout << (vcStrg.getCurAmount()) << "\n";
+	std::cout << (notWholeSaleClient.getBalance()) << "\n";
+
     std::cout << "Hello World!\n";
 }
 

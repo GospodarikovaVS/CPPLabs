@@ -3,11 +3,17 @@
 #include "Distributor.h"
 #include "Store.h"
 #include "Storage.h"
+#include "Supplier.h"
 
+TradeOrg::TradeOrg(double balance) {
+	Balance = balance;
+}
 
-double TradeOrg::orderVCS(VendorCode vc, double amountOrdered) {
-
-	return 0.0;
+double TradeOrg::orderVCS(VendorCode vc, double amountOrdered, double price) {
+	Supplier sup = Supplier();
+	VCSet order = sup.supplyVCSet(vc, amountOrdered, price);
+	Balance -= price * order.getCurAmount();
+	return order.getCurAmount();
 }
 
 void TradeOrg::addDistributor(Distributor* distr) {
@@ -34,10 +40,12 @@ double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balanc
 						curBalance -= ordPrice;
 						amountToSelling -= ordered;
 						if (amountToSelling <= 1E-5) {
+							*balance = curBalance;
 							return amountOrdered;
 						}
 					}
 					else {
+						*balance = curBalance;
 						return -1;
 					}
 				}
@@ -57,10 +65,12 @@ double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balanc
 						curBalance -= ordPrice;
 						amountToSelling -= ordered;
 						if (amountToSelling <= 1E-5) {
+							*balance = curBalance;
 							return amountOrdered;
 						}
 					}
 					else {
+						*balance = curBalance;
 						return -1;
 					}
 				}
@@ -68,7 +78,8 @@ double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balanc
 			catch (...) {
 			}
 		}
-	}	
+	}
+	*balance = curBalance;
 	return amountOrdered - amountToSelling;
 }
 

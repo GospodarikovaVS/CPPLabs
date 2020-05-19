@@ -3,15 +3,15 @@
 
 Storage::Storage(TradeOrg* trOrg) {
 	this->curBalance = this->defBalance;
-	vcSets = std::vector<VCSet>();
+	vcSets = std::vector<VCSet*>();
 	prntTrOrg = trOrg;
 }
 double Storage::calculateSum(double numReal, VendorCode vc) {
 	double price = 0;
-	for (VCSet vcs : vcSets)
+	for (VCSet* vcs : vcSets)
 	{
-		if (vcs.checkType(vc))
-			price = vcs.getPrice();
+		if (vcs->checkType(vc))
+			price = vcs->getPrice();
 	}
 	return numReal * (price*perExtraCharge);
 }
@@ -28,34 +28,45 @@ double Storage::getProfit() {
 	return profit;
 }
 void Storage::sell(VendorCode vc, double amount) {
-	for (VCSet vcs : vcSets)
+	for (VCSet* vcs : vcSets)
 	{
-		if (vcs.checkType(vc))
+		if (vcs->checkType(vc))
 		{
-			vcs.increaseAmount(-amount);
-			orderVCS(vc, amount);
+			vcs->increaseAmount(-amount);
+			if(vcs->getCurAmount()<vcs->getDefAmount())
+				orderVCS(vc, amount);
 			return;
 		}
 	}
 }
 
 double Storage::deliverVCSToStore(VendorCode vc, double amountOrdered) {
-	for (VCSet vcs : vcSets)
+	for (VCSet* vcs : vcSets)
 	{
-		if (vcs.checkType(vc))
+		if (vcs->checkType(vc))
 		{
-			if (amountOrdered <= vcs.getCurAmount())
+			if (amountOrdered <= vcs->getCurAmount())
 			{
-				vcs.increaseAmount(-amountOrdered);
+				vcs->increaseAmount(-amountOrdered);
+				orderVCS(vc, amountOrdered);
 				return amountOrdered;
 			}
 			else {
-				vcs.increaseAmount(-vcs.getCurAmount());
-				return vcs.getCurAmount();
+				vcs->increaseAmount(-vcs->getCurAmount());
+				orderVCS(vc, vcs->getDefAmount());
+				return vcs->getCurAmount();
 			}
 		}
 	}
 }
 void Storage::orderVCS(VendorCode vc, double amountOrdered) {
-	prntTrOrg->orderVCS(vc, amountOrdered);
+	for (VCSet* vcs : vcSets)
+	{
+		if (vcs->checkType(vc))
+		{
+			vcs->increaseAmount(prntTrOrg->
+				orderVCS(vc, amountOrdered, vcs->getPrice()));
+			return;
+		}
+	}
 }

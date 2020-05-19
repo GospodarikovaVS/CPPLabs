@@ -6,7 +6,8 @@
 class TradeOrg
 {
 public:
-	double orderVCS(VendorCode vc, double amountOrdered);
+	TradeOrg(double balance);
+	double orderVCS(VendorCode vc, double amountOrdered, double price);
 	void addDistributor(Distributor* distr);
 	double BuyProducts(VendorCode vc, double amountOrdered, double* balance, bool wholeSale);
 
