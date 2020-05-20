@@ -10,6 +10,10 @@ Node<T>::Node(T value) {
 }
 
 template <class T>
+Node<T>::~Node() {
+}
+
+template <class T>
 void Node<T>::setValue(T value) {
 	this->value = value;
 }

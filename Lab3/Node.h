@@ -8,6 +8,7 @@ class Node
 {
 public:
 	Node(T value);
+	~Node();
 	void setValue(T value);
 	T getValue();
 	template <typename L>

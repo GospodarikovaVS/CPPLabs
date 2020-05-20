@@ -9,6 +9,7 @@ class BinaryTree
 public:
 	BinaryTree(Node<T>* r);
 	BinaryTree(T r);
+	~BinaryTree();
 	void setRoot(Node<T>* r);
 	Node<T>* getRoot();
 	void setRootValue(T r);

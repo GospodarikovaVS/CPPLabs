@@ -8,7 +8,7 @@ BinaryTree<T>::BinaryTree(Node<T>* r) {
 }
 template <class T>
 BinaryTree<T>::BinaryTree(T r) {
-	this->root = &Node<T>(r);
+	this->root = new Node<T>(r);
 }
 template <class T>
 void BinaryTree<T>::setRoot(Node<T>* r) {
@@ -25,6 +25,10 @@ void BinaryTree<T>::setRootValue(T rv) {
 template <class T>
 T BinaryTree<T>::getRootValue() {
 	return this->root->getValue();
+}
+template <class T>
+BinaryTree<T>::~BinaryTree() {
+	delete root;
 }
 
 
