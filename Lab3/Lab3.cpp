@@ -3,12 +3,18 @@
 
 #include <iostream>
 #include "BinaryTree.h"
+#include<vector>
 using namespace std;
 
 int main()
 {
 	BinaryTree<int> bt = BinaryTree<int>(1);
 	bt.setRootValue(4);
+	cout << bt.showAsString();
+	vector<int> vec = bt.showAsVector();
+	for (int i = 0; i < vec.size(); i++) {
+		cout << vec[i];
+	}
     cout << bt.getRootValue();
 }
 

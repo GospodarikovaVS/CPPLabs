@@ -11,18 +11,14 @@ public:
 	~Node();
 	void setValue(T value);
 	T getValue();
-	template <typename L>
-	Node<L>* getLeftNeigh();
-	template <typename R>
-	Node<R>* getRightNeigh();
-	template <typename L>
-	void setLeftNeigh(Node<L> *l);
-	template <typename R>
-	void setRightNeigh(Node<R> *r);
+	Node<T>* getLeftNeigh();
+	Node<T>* getRightNeigh();
+	void setLeftNeigh(Node<T> *l);
+	void setRightNeigh(Node<T> *r);
 private:
 	T value;
-	Node* left;
-	Node* right;
+	Node<T>* left;
+	Node<T>* right;
 };
 #include "Node.cpp"
 #endif
