@@ -42,6 +42,7 @@ private:
 	void clearBinaryTree(Node<T>* n);
 	string showNodeAsString(Node<T>* n);
 	vector<T> showNodeAsVector(Node<T>* n);
+	Node<T>* searchForNearestEmptyNode(Node<T>* curNode, int curDeep, int* minDeep, Node<T>** resNode);
 };
 #include"BinaryTree.cpp"
 

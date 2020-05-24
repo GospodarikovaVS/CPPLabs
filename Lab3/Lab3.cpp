@@ -10,12 +10,28 @@ int main()
 {
 	BinaryTree<int> bt = BinaryTree<int>(1);
 	bt.setRootValue(4);
-	cout << bt.showAsString();
+	bt.addNodeToLeft(3);
+	bt.addNodeToRight(7);
 	vector<int> vec = bt.showAsVector();
 	for (int i = 0; i < vec.size(); i++) {
 		cout << vec[i];
 	}
-    cout << bt.getRootValue();
+	cout << endl;
+	BinaryTree<string> bts = BinaryTree<string>("root");
+	bts.addNodeToLeft("left");
+	bts.addNodeToRight("right");
+	bts.addBalancedNode("ll");
+	bts.addBalancedNode("lr");
+	bts.addBalancedNode("rl");
+	bts.addBalancedNode("rr");
+	Node<string>* n = new Node<string>("lll");
+	bts.addBalancedNode(n);
+	vector<string> vecs = bts.showAsVector();
+	for (int i = 0; i < vecs.size(); i++) {
+		cout << vecs[i];
+	}
+	cout << endl;
+	cout << bts.showAsString();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
