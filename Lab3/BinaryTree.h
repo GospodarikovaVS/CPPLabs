@@ -24,6 +24,12 @@ public:
 	//outputing
 	string showAsString();
 	vector<T> showAsVector();
+	////searching
+	Node<T>* SearchNodeByValue(T val);
+	Node<T>* SearchNodeWithMinValue();
+	Node<T>* SearchNodeWithMaxValue();
+	T SearchMinValue();
+	T SearchMaxValue();
 
 	//inputing
 	void addBalancedNode(T n);
@@ -33,15 +39,17 @@ public:
 	void addNodeToRight(Node<T>* n);
 	void addNodeToLeft(T n);
 	void addNodeToLeft(Node<T>* n);
-	////customizable adding
-	void addNodeWithManaging(T n);
-	void addNodeWithManaging(Node<T>* n);
 
 private:
 	Node<T>* root;
 	void clearBinaryTree(Node<T>* n);
 	string showNodeAsString(Node<T>* n);
 	vector<T> showNodeAsVector(Node<T>* n);
+	T searchingMinValue(Node<T>* n, T minVal);
+	T searchingMaxValue(Node<T>* n, T maxVal);
+	Node<T>* searchingByValue(Node<T>* n, T val);
+	Node<T>* searchingMinNode(Node<T>* n, Node<T>* minNode);
+	Node<T>* searchingMaxNode(Node<T>* n, Node<T>* maxNode);
 	Node<T>* searchForNearestEmptyNode(Node<T>* curNode, int curDeep, int* minDeep, Node<T>** resNode);
 };
 #include"BinaryTree.cpp"

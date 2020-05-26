@@ -93,7 +93,116 @@ vector<T> BinaryTree<T>::showNodeAsVector(Node<T> *n) {
 	}
 	return vec;
 }
-
+////searching
+template <class T>
+Node<T>* BinaryTree<T>::SearchNodeByValue(T val) {
+	return searchingByValue(root, val);
+}
+template <class T>
+Node<T>* BinaryTree<T>::searchingByValue(Node<T>* n, T val) {
+	if (n->getValue() == val) {
+		return n;
+	}
+	else {
+		if (n->getRightNeigh()) {
+			Node<T>* rn = searchingByValue(n->getRightNeigh(), val);
+			if (rn) return rn;
+		}
+		if (n->getLeftNeigh()) {
+			Node<T>* ln = searchingByValue(n->getLeftNeigh(), val);
+			if (ln) return ln;
+		}
+	}
+	return nullptr;
+}
+template <class T>
+Node<T>* BinaryTree<T>::SearchNodeWithMinValue() {
+	return searchingMinNode(root, root);
+}
+template <class T>
+Node<T>* BinaryTree<T>::searchingMinNode(Node<T>* n, Node<T>* minNode) {
+	Node<T>* minVal = minNode;
+	if (n->getValue() < minVal->getValue()) {
+		minVal = n;
+	}
+	if (n->getRightNeigh()) {
+		Node<T>* rn = searchingMinNode(n->getRightNeigh(), minVal);
+		if (rn && rn->getValue() < minVal->getValue())
+			minVal = rn;
+	}
+	if (n->getLeftNeigh()) {
+		Node<T>* ln = searchingMinNode(n->getLeftNeigh(), minVal);
+		if (ln && ln->getValue() < minVal->getValue())
+			minVal = ln;
+	}
+	return minVal;
+}
+template <class T>
+Node<T>* BinaryTree<T>::SearchNodeWithMaxValue() {
+	return searchingMaxNode(root, root);
+}
+template <class T>
+Node<T>* BinaryTree<T>::searchingMaxNode(Node<T>* n, Node<T>* maxNode) {
+	Node<T>* maxVal = maxNode;
+	if (n->getValue() > maxVal->getValue()) {
+		maxVal = n;
+	}
+	if (n->getRightNeigh()) {
+		Node<T>* rn = searchingMaxNode(n->getRightNeigh(), maxVal);
+		if (rn && rn->getValue() > maxVal->getValue())
+			maxVal = rn;
+	}
+	if (n->getLeftNeigh()) {
+		Node<T>* ln = searchingMaxNode(n->getLeftNeigh(), maxVal);
+		if (ln && ln->getValue() > maxVal->getValue())
+			maxVal = ln;
+	}
+	return maxVal;
+}
+template <class T>
+T BinaryTree<T>::SearchMinValue() {
+	return searchingMinValue(root, root->getValue());
+}
+template <class T>
+T BinaryTree<T>::searchingMinValue(Node<T>* n, T min) {
+	T minVal = min;
+	if (n->getValue() < minVal) {
+		minVal = n->getValue();
+	}
+	if (n->getRightNeigh()) {
+		T rn = searchingMinValue(n->getRightNeigh(), minVal);
+		if (rn < minVal)
+			minVal = rn;
+	}
+	if (n->getLeftNeigh()) {
+		T ln = searchingMinValue(n->getLeftNeigh(), minVal);
+		if (ln < minVal)
+			minVal = ln;
+	}
+	return minVal;
+}
+template <class T>
+T BinaryTree<T>::SearchMaxValue() {
+	return searchingMaxValue(root, root->getValue());
+}
+template <class T>
+T BinaryTree<T>::searchingMaxValue(Node<T>* n, T max) {
+	T maxVal = max;
+	if (n->getValue() > maxVal) {
+		maxVal = n->getValue();
+	}
+	if (n->getRightNeigh()) {
+		T rn = searchingMaxValue(n->getRightNeigh(), maxVal);
+		if (rn > maxVal)
+			maxVal = rn;
+	}
+	if (n->getLeftNeigh()) {
+		T ln = searchingMaxValue(n->getLeftNeigh(), maxVal);
+		if (ln > maxVal)
+			maxVal = ln;
+	}
+	return maxVal;
+}
 
 //inputing
 template <class T>
@@ -161,13 +270,6 @@ void BinaryTree<T>::addNodeToLeft(Node<T>* n) {
 		curNode = curNode->getLeftNeigh();
 	}
 	curNode->setLeftNeigh(n);
-}
-////customizable adding
-template <class T>
-void BinaryTree<T>::addNodeWithManaging(T n) {
-}
-template <class T>
-void BinaryTree<T>::addNodeWithManaging(Node<T>* n) {
 }
 
 #endif

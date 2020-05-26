@@ -32,8 +32,18 @@ int main()
 	}
 	cout << endl;
 	cout << bts.showAsString();
-}
 
+
+	Node<string>* n2 = bts.SearchNodeByValue("lll");
+	cout << n2->getValue();
+	cout << endl;
+	Node<string>* nMin = bts.SearchNodeWithMinValue();
+	cout << nMin->getValue();
+	cout << endl;
+	string max = bts.SearchMaxValue();
+	cout << max;
+	cout << endl;
+}
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 

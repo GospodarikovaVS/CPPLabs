@@ -8,10 +8,12 @@
 
 int main()
 {
+
+
 	TradeOrg trOrg = TradeOrg(1000000);
 	Storage strg = Storage(&trOrg);
 	Store str = Store(&strg);
-	Client notWholeSaleClient = Client(10000, false);
+	Client notWholeSaleClient = Client(10000, false) ;
 	VendorCode vc = VendorCode("Молоко", 0.9, 1, true, false);
 	trOrg.addDistributor(&strg);
 	trOrg.addDistributor(&str);
