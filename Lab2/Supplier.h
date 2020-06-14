@@ -4,6 +4,6 @@
 class Supplier
 {
 public:
-	VCSet supplyVCSet(VendorCode vc, double amount, double price);
+	VCSet* supplyVCSet(VendorCode vc, double amount, double price);
 };
 

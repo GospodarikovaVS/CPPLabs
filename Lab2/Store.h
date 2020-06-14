@@ -10,11 +10,11 @@ class Store :
 public:
 	Store(Storage* prStrg);
 	void setParentStorage(Storage* prntStrg);
+	void orderAllVCSets();
 	Storage* getParentStorage();
 	double calculateSum(double numReal, VendorCode vc) override;
-	void sell(VendorCode vc, double amount) override;
-	void replenishVCS(VCSet* vcs);
-	void replenishVCS(VCSet* vcs, double amountToOrdering);
+	vector<VCSet> sell(VendorCode vc, double amount) override;
+	void replenishVCS(VendorCode vc, double amount, double price);
 	double getProfit() override;
 	double getDefBalance() override;
 	double getPerExtraCharge();

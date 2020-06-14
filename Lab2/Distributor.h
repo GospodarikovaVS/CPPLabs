@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "VCSet.h"
+using namespace std;
 
 class Distributor
 {
@@ -11,7 +12,7 @@ public:
 	void addVCSet(VendorCode vc, double amount, double price);
 	virtual double calculateSum(double numReal, VendorCode vc);
 	virtual double getProfit();
-	virtual void sell(VendorCode vc, double amount);
+	virtual vector<VCSet> sell(VendorCode vc, double amount);
 	virtual double getDefBalance();
 
 	//void changeCurBalance(double changing);
@@ -19,7 +20,7 @@ public:
 
 protected:
 	double curBalance;
-	std::vector<VCSet*> vcSets;
+	vector<VCSet*> vcSets;
 	float perMinAcceptLvl;
 };
 

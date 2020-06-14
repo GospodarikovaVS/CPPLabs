@@ -7,6 +7,17 @@ Node<T>::Node(T value) {
 	this->value = value;
 	left = nullptr;
 	right = nullptr;
+	parent = nullptr;
+	visited = false;
+}
+
+template <class T>
+Node<T>::Node(Node<T>* pr, T value) {
+	this->value = value;
+	left = nullptr;
+	right = nullptr;
+	parent = pr;
+	visited = false;
 }
 
 template <class T>
@@ -36,6 +47,11 @@ Node<T>* Node<T>::getRightNeigh() {
 }
 
 template <class T>
+Node<T>* Node<T>::getParent() {
+	return this->parent;
+}
+
+template <class T>
 void Node<T>::setLeftNeigh(Node<T> *l) {
 	this->left = l;
 }
@@ -43,6 +59,21 @@ void Node<T>::setLeftNeigh(Node<T> *l) {
 template <class T>
 void Node<T>::setRightNeigh(Node<T> *r) {
 	this->right = r;
+}
+
+template <class T>
+void Node<T>::setParent(Node<T>* pr) {
+	this->parent = pr;
+}
+
+template <class T>
+bool Node<T>::getVisited() { //why can`t i use only visited instead of getVisited(In this case i call !private as public?! field instead method)
+	return visited;
+}
+
+template <class T>
+void Node<T>::setVisited(bool state) {
+	visited = state;
 }
 
 #endif

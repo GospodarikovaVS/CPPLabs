@@ -40,8 +40,18 @@ public:
 	void addNodeToLeft(T n);
 	void addNodeToLeft(Node<T>* n);
 
+	//iterator
+	void start();
+	////ops
+	Node<T>* operator->();
+	void operator+();
+	void operator-();
+
+
 private:
+	Node<T>* curNode;
 	Node<T>* root;
+	void restartIterations(Node<T>* curNode);
 	void clearBinaryTree(Node<T>* n);
 	string showNodeAsString(Node<T>* n);
 	vector<T> showNodeAsVector(Node<T>* n);

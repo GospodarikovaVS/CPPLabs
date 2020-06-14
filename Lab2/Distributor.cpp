@@ -33,5 +33,6 @@ double Distributor::calculateSum(double numReal, VendorCode vc) {
 double Distributor::getProfit() {
 	return 0.0;
 }
-void Distributor::sell(VendorCode vc, double amount) {
+vector<VCSet> Distributor::sell(VendorCode vc, double amount) {
+	return vector<VCSet>();
 }

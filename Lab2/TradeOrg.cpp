@@ -9,11 +9,11 @@ TradeOrg::TradeOrg(double balance) {
 	Balance = balance;
 }
 
-double TradeOrg::orderVCS(VendorCode vc, double amountOrdered, double price) {
+VCSet* TradeOrg::orderVCS(VendorCode vc, double amountOrdered, double price) {
 	Supplier sup = Supplier();
-	VCSet order = sup.supplyVCSet(vc, amountOrdered, price);
-	Balance -= price * order.getCurAmount();
-	return order.getCurAmount();
+	VCSet* order = sup.supplyVCSet(vc, amountOrdered, price);
+	Balance -= price * order->getCurAmount();
+	return order;
 }
 
 void TradeOrg::addDistributor(Distributor* distr) {
@@ -21,7 +21,8 @@ void TradeOrg::addDistributor(Distributor* distr) {
 	Balance -= distr->getDefBalance();
 }
 
-double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balance, bool wholeSale) { //-1 - недостаточно средств
+vector<VCSet> TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balance, bool wholeSale) { //-1 - недостаточно средств
+	vector<VCSet> vecVCSet;
 	double amountToSelling = amountOrdered;
 	double curBalance = *balance;
 	//search of distr
@@ -36,17 +37,19 @@ double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balanc
 					double ordPrice = str->calculateSum(ordered, vc);
 					if (ordPrice < curBalance)
 					{
-						str->sell(vc, ordered);
+						for(VCSet v : str->sell(vc, ordered)) {
+							vecVCSet.push_back(v);
+						}
 						curBalance -= ordPrice;
 						amountToSelling -= ordered;
 						if (amountToSelling <= 1E-5) {
 							*balance = curBalance;
-							return amountOrdered;
+							return vecVCSet;
 						}
 					}
 					else {
 						*balance = curBalance;
-						return -1;
+						return vecVCSet;
 					}
 				}
 			}
@@ -61,17 +64,19 @@ double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balanc
 					double ordPrice = strg->calculateSum(ordered, vc);
 					if (ordPrice < curBalance)
 					{
-						strg->sell(vc, ordered);
+						for (VCSet v : strg->sell(vc, ordered)) {
+							vecVCSet.push_back(v);
+						}
 						curBalance -= ordPrice;
 						amountToSelling -= ordered;
 						if (amountToSelling <= 1E-5) {
 							*balance = curBalance;
-							return amountOrdered;
+							return vecVCSet;
 						}
 					}
 					else {
 						*balance = curBalance;
-						return -1;
+						return vecVCSet;
 					}
 				}
 			}
@@ -80,7 +85,7 @@ double TradeOrg::BuyProducts(VendorCode vc, double amountOrdered, double* balanc
 		}
 	}
 	*balance = curBalance;
-	return amountOrdered - amountToSelling;
+	return vecVCSet;
 }
 
 void TradeOrg::collectProfit() {

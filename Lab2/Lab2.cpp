@@ -6,15 +6,31 @@
 
 #include <iostream>
 
+using namespace std;
+
 int main()
 {
-
-
+	VendorCode vc = VendorCode("Молоко", 0.9, 1, true, false);
+	VCSet vcsStrg = VCSet(vc, 50, 43);
+	VCSet vcsStr = VCSet(vc, 10, 43, vcsStrg.getDate());
+	cout << vcsStrg.getDateAsString();
+	cout << vcsStr.getDateAsString();
 	TradeOrg trOrg = TradeOrg(1000000);
 	Storage strg = Storage(&trOrg);
 	Store str = Store(&strg);
+	strg.addVCSet(&vcsStrg);
+	str.addVCSet(&vcsStr);
+	trOrg.addDistributor(&str);
+	trOrg.addDistributor(&strg);
+	for (int i = 0; i < 1000; i++) {
+	Client WholeSaleClient = Client(10000, true);
+	std::cout << (WholeSaleClient.getBalance()) << "\n";
+	std::cout << (WholeSaleClient.buyVCAndPrint(vc, 11, &trOrg)) << "\n";
+	std::cout << (WholeSaleClient.getBalance()) << "\n";
+	
+	}
+	/*
 	Client notWholeSaleClient = Client(10000, false) ;
-	VendorCode vc = VendorCode("Молоко", 0.9, 1, true, false);
 	trOrg.addDistributor(&strg);
 	trOrg.addDistributor(&str);
 	VCSet vcStrg = VCSet(vc, 50, 100);
@@ -31,7 +47,7 @@ int main()
 	std::cout << (notWholeSaleClient.buyVC(vc, 80, &trOrg)) << "\n";
 	std::cout << (vcStr.getCurAmount()) << "\n";
 	std::cout << (vcStrg.getCurAmount()) << "\n";
-	std::cout << (notWholeSaleClient.getBalance()) << "\n";
+	std::cout << (notWholeSaleClient.getBalance()) << "\n";*/
 
     std::cout << "Hello World!\n";
 }

@@ -27,20 +27,33 @@ double Storage::getProfit() {
 	curBalance = defBalance;
 	return profit;
 }
-void Storage::sell(VendorCode vc, double amount) {
+vector<VCSet> Storage::sell(VendorCode vc, double amount) { 
+	int amountOrdered = amount;
+	vector<VCSet> vecVCSets;
+	int i = 0;
 	for (VCSet* vcs : vcSets)
 	{
 		if (vcs->checkType(vc))
 		{
-			vcs->increaseAmount(-amount);
-			if(vcs->getCurAmount()<vcs->getDefAmount())
-				orderVCS(vc, amount);
-			return;
+			if (vcs->getCurAmount() >= amountOrdered)
+			{
+				vecVCSets.push_back(vcs->createDaughterVCS(amount));
+				orderAllVCSets();
+				return vecVCSets;
+			}
+			else {
+				amountOrdered -= vcs->getCurAmount();
+				vecVCSets.push_back(vcs->createDaughterVCS(vcs->getCurAmount()));
+			}
 		}
+		i++;
 	}
+	orderAllVCSets();
+	return vecVCSets;
 }
 
-double Storage::deliverVCSToStore(VendorCode vc, double amountOrdered) {
+VCSet* Storage::deliverVCSToStore(VendorCode vc, double amountOrdered, double price) {
+	int i = 0;
 	for (VCSet* vcs : vcSets)
 	{
 		if (vcs->checkType(vc))
@@ -48,25 +61,47 @@ double Storage::deliverVCSToStore(VendorCode vc, double amountOrdered) {
 			if (amountOrdered <= vcs->getCurAmount())
 			{
 				vcs->increaseAmount(-amountOrdered);
-				orderVCS(vc, amountOrdered);
-				return amountOrdered;
+				orderVCS(vc, amountOrdered, price);
+				VCSet* vcsOrd = new VCSet(vc, amountOrdered, price, vcs->getDate());
+				return vcsOrd;
 			}
 			else {
-				vcs->increaseAmount(-vcs->getCurAmount());
-				orderVCS(vc, vcs->getDefAmount());
-				return vcs->getCurAmount();
+				//vcs->increaseAmount(-vcs->getCurAmount());
+				vcSets.erase(vcSets.begin()+i);
+				orderVCS(vc, vcs->getDefAmount(), price);
+				VCSet* vcsOrd = new VCSet(vc, amountOrdered, price, vcs->getDate());
+				return vcsOrd;
 			}
 		}
+		i++;
 	}
+	return nullptr;
 }
-void Storage::orderVCS(VendorCode vc, double amountOrdered) {
-	for (VCSet* vcs : vcSets)
-	{
-		if (vcs->checkType(vc))
+void Storage::orderVCS(VendorCode vc, double amountOrdered, double price) {//rewrite
+	VCSet* vcs = prntTrOrg->orderVCS(vc, amountOrdered, price);
+	vcSets.push_back(vcs);
+}
+void Storage::orderAllVCSets() {
+	vector<VendorCode> vecVC;
+	bool checker = true;
+	for (int i = vcSets.size()-1; i >= 0; i--) {
+		for(VendorCode vc : vecVC)
 		{
-			vcs->increaseAmount(prntTrOrg->
-				orderVCS(vc, amountOrdered, vcs->getPrice()));
-			return;
+			if (vc.getCodeSKU() == vcSets[i]->getVC().getCodeSKU())
+				checker = false;
 		}
+		if (checker) {
+			vecVC.push_back(vcSets[i]->getVC());
+			if (vcSets[i]->getCurAmount() < vcSets[i]->getDefAmount()) {
+				vcSets.push_back(prntTrOrg->orderVCS(
+					vcSets[i]->getVC(),
+					vcSets[i]->getDefAmount(),
+					vcSets[i]->getPrice()));
+			}
+		}
+		if (vcSets[i]->getCurAmount() == 0) {
+			vcSets.erase(vcSets.begin() + i);
+		}
+		checker = true;
 	}
 }

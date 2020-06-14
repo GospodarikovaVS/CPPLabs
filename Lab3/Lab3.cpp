@@ -29,6 +29,25 @@ int main()
 	vector<string> vecs = bts.showAsVector();
 	for (int i = 0; i < vecs.size(); i++) {
 		cout << vecs[i];
+		cout << endl;
+	}
+	cout << endl;
+	cout << endl;
+	bts.start();
+	cout << bts.operator->()->getValue();
+	bts.operator+();
+	cout << endl;
+	cout << bts.operator->()->getValue();
+	bts.operator-();
+	cout << endl;
+	cout << bts.operator->()->getValue();
+	cout << endl;
+	cout << endl;
+	bts.start();
+	while(bts.operator->()) {
+		cout << bts.operator->()->getValue();
+		bts.operator+();
+		cout << endl;
 	}
 	cout << endl;
 	cout << bts.showAsString();

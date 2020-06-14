@@ -8,7 +8,7 @@ public:
 	bool checkState();
 	void changeState(bool st);
 	double deliverVCSetsFromStorage();
-	VCSet deliverVCSetsFromSupplier(VendorCode vc, double amount, double price);
+	VCSet* deliverVCSetsFromSupplier(VendorCode vc, double amount, double price);
 
 
 private:

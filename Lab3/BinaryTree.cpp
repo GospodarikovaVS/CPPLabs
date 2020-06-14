@@ -7,13 +7,16 @@
 template <class T>
 BinaryTree<T>::BinaryTree(Node<T>* r) {
 	this->root = r;
+	curNode = root;
 }
 template <class T>
 BinaryTree<T>::BinaryTree(T r) {
 	this->root = new Node<T>(r);
+	curNode = root;
 }
 template <class T>
 BinaryTree<T>::~BinaryTree() {
+	curNode = nullptr;
 	clearBinaryTree(root);
 }
 template <class T>
@@ -207,9 +210,9 @@ T BinaryTree<T>::searchingMaxValue(Node<T>* n, T max) {
 //inputing
 template <class T>
 void BinaryTree<T>::addBalancedNode(T n) {
-	Node<T>* newNode = new Node<T>(n);
 	int minDeep = 0;
 	Node<T>* rNode = searchForNearestEmptyNode(root, 0, &minDeep, &root);
+	Node<T>* newNode = new Node<T>(rNode, n);
 	if (!rNode->getLeftNeigh()) {
 		rNode->setLeftNeigh(newNode);
 	} else rNode->setRightNeigh(newNode);
@@ -218,6 +221,7 @@ template <class T>
 void BinaryTree<T>::addBalancedNode(Node<T>* n) {
 	int minDeep = 0;
 	Node<T>* rNode = searchForNearestEmptyNode(root, 0, &minDeep, &root);
+	n->setParent(rNode);
 	if (!rNode->getLeftNeigh()) {
 		rNode->setLeftNeigh(n);
 	}
@@ -245,7 +249,7 @@ void BinaryTree<T>::addNodeToRight(T n) {
 	while (curNode->getRightNeigh()) {
 		curNode = curNode->getRightNeigh();
 	}
-	curNode->setRightNeigh(new Node<T>(n));
+	curNode->setRightNeigh(new Node<T>(curNode, n));
 }
 template <class T>
 void BinaryTree<T>::addNodeToRight(Node<T>* n) {
@@ -253,6 +257,7 @@ void BinaryTree<T>::addNodeToRight(Node<T>* n) {
 	while (curNode->getRightNeigh()) {
 		curNode = curNode->getRightNeigh();
 	}
+	n->setParent(curNode);
 	curNode->setRightNeigh(n);
 }
 template <class T>
@@ -261,7 +266,7 @@ void BinaryTree<T>::addNodeToLeft(T n) {
 	while (curNode->getLeftNeigh()) {
 		curNode = curNode->getLeftNeigh();
 	}
-	curNode->setLeftNeigh(new Node<T>(n));
+	curNode->setLeftNeigh(new Node<T>(curNode, n));
 }
 template <class T>
 void BinaryTree<T>::addNodeToLeft(Node<T>* n) {
@@ -269,7 +274,81 @@ void BinaryTree<T>::addNodeToLeft(Node<T>* n) {
 	while (curNode->getLeftNeigh()) {
 		curNode = curNode->getLeftNeigh();
 	}
+	n->setParent(curNode);
 	curNode->setLeftNeigh(n);
+}
+
+//iterator
+template <class T>
+void BinaryTree<T>::start() {
+	if (curNode->getVisited()) {
+		restartIterations(root);
+	}
+	curNode = root;
+	operator+();
+}
+
+template <class T>
+void BinaryTree<T>::restartIterations(Node<T>* curNode) {
+	curNode->setVisited(false);
+	if (curNode->getLeftNeigh())
+	{
+		restartIterations(curNode->getLeftNeigh());
+	}
+	if (curNode->getRightNeigh()) 
+	{
+		restartIterations(curNode->getRightNeigh());
+	}
+}
+////ops
+template <class T>
+void BinaryTree<T>::operator+() {
+	/*curNode = nullptr;*/
+	if (curNode->getLeftNeigh() 
+		&& !curNode->getLeftNeigh()->getVisited()) {
+		curNode = curNode->getLeftNeigh();
+		operator+();
+	}
+	else if (!curNode->getVisited()) {
+		curNode->setVisited(true);
+	}
+	else if (curNode->getRightNeigh() 
+		&& !curNode->getRightNeigh()->getVisited()) {
+		curNode = curNode->getRightNeigh(); 
+		operator+();
+	}
+	else {
+		curNode = curNode->getParent();
+		if (curNode) {
+			operator+();
+		}
+		
+	}
+}
+template <class T>
+void BinaryTree<T>::operator-() {
+	if(curNode->getRightNeigh()
+		&& curNode->getRightNeigh()->getVisited()) {
+		curNode = curNode->getRightNeigh();
+		operator-();
+	}
+	else if (curNode->getVisited()) {
+		curNode->setVisited(false);
+		curNode = curNode->getLeftNeigh();
+	}
+	else if (curNode->getLeftNeigh()
+		&& curNode->getLeftNeigh()->getVisited()) {
+		curNode = curNode->getLeftNeigh();
+		operator-();
+	}
+	else {
+		curNode = curNode->getParent();
+		operator-();
+	}
+}
+template <class T>
+Node<T>* BinaryTree<T>::operator->() {
+	return curNode;
 }
 
 #endif

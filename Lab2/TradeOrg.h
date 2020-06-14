@@ -2,14 +2,15 @@
 #include <vector>
 #include "Distributor.h"
 #include "VendorCode.h"
+using namespace std;
 
 class TradeOrg
 {
 public:
 	TradeOrg(double balance);
-	double orderVCS(VendorCode vc, double amountOrdered, double price);
+	VCSet* orderVCS(VendorCode vc, double amountOrdered, double price);
 	void addDistributor(Distributor* distr);
-	double BuyProducts(VendorCode vc, double amountOrdered, double* balance, bool wholeSale);
+	vector<VCSet> BuyProducts(VendorCode vc, double amountOrdered, double* balance, bool wholeSale);
 
 private:
 	double Balance;

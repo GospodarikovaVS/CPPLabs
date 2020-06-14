@@ -5,7 +5,8 @@ class Client
 {
 public:
 	Client(double balance, bool wholeSale);
-	double buyVC(VendorCode vc, double amount, TradeOrg *trOrg);
+	vector<VCSet> buyVC(VendorCode vc, double amount, TradeOrg *trOrg);
+	string buyVCAndPrint(VendorCode vc, double amount, TradeOrg* trOrg);
 	double getBalance();
 
 private:

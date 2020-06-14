@@ -12,7 +12,7 @@ double Truck::deliverVCSetsFromStorage() {
 
 	return price;
 }
-VCSet Truck::deliverVCSetsFromSupplier(VendorCode vc, double amount, double price) {
+VCSet* Truck::deliverVCSetsFromSupplier(VendorCode vc, double amount, double price) {
 	//delay(1 / speed);
 	Supplier sup = Supplier();
 	return sup.supplyVCSet(vc, amount, price);
