@@ -1,0 +1,22 @@
+﻿REGEDIT
+; This .REG file may be used by your SETUP program.
+;   If a SETUP program is not available, the entries below will be
+;   registered in your InitInstance automatically with a call to
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+HKEY_CLASSES_ROOT\.rtf = LibraryApp.Document
+HKEY_CLASSES_ROOT\LibraryApp.Document\shell\open\command = LibraryApp.EXE %1
+HKEY_CLASSES_ROOT\LibraryApp.Document\shell\open\ddeexec = [open("%1")]
+HKEY_CLASSES_ROOT\LibraryApp.Document\shell\open\ddeexec\application = LibraryApp
+    ; note: the application is optional
+    ;  (it defaults to the app name in "command")
+
+HKEY_CLASSES_ROOT\LibraryApp.Document = LibraryApp.Document
+
+
+HKEY_CLASSES_ROOT\LibraryApp.Document\CLSID = {7d9ca133-8b34-4188-944a-e32310c5b04a}
+
+HKEY_CLASSES_ROOT\CLSID\{7d9ca133-8b34-4188-944a-e32310c5b04a} = LibraryApp.Document
+HKEY_CLASSES_ROOT\CLSID\{7d9ca133-8b34-4188-944a-e32310c5b04a}\ProgId = LibraryApp.Document
+
+HKEY_CLASSES_ROOT\CLSID\{7d9ca133-8b34-4188-944a-e32310c5b04a}\LocalServer32 = LibraryApp.EXE

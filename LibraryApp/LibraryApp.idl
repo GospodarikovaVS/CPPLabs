@@ -1,0 +1,29 @@
+﻿// LibraryApp.idl : type library source for LibraryApp.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (LibraryApp.tlb).
+
+[ uuid(1c7c7d59-70dd-4290-b380-81c16f2a6932), version(1.0) ]
+library LibraryApp
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	//  Primary dispatch interface for CLibraryAppDoc
+
+	[ uuid(6b9d4970-14c5-4aea-b56f-37d5b0abb1b1) ]
+	dispinterface ILibraryApp
+	{
+		properties:
+
+		methods:
+	};
+
+	//  Class information for CLibraryAppDoc
+
+	[ uuid(7d9ca133-8b34-4188-944a-e32310c5b04a) ]
+	coclass CLibraryAppDoc
+	{
+		[default] dispinterface ILibraryApp;
+	};
+};

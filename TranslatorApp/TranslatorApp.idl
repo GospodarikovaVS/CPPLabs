@@ -1,0 +1,29 @@
+﻿// TranslatorApp.idl : type library source for TranslatorApp.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (TranslatorApp.tlb).
+
+[ uuid(95c12141-4934-4510-bc20-4d026de9af88), version(1.0) ]
+library TranslatorApp
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	//  Primary dispatch interface for CTranslatorAppDoc
+
+	[ uuid(c12c631b-c693-4b2d-a33d-179da1c7cfe5) ]
+	dispinterface ITranslatorApp
+	{
+		properties:
+
+		methods:
+	};
+
+	//  Class information for CTranslatorAppDoc
+
+	[ uuid(752c4c48-7bef-4870-be5f-da64974061cd) ]
+	coclass CTranslatorAppDoc
+	{
+		[default] dispinterface ITranslatorApp;
+	};
+};
