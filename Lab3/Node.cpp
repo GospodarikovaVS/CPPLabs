@@ -67,7 +67,7 @@ void Node<T>::setParent(Node<T>* pr) {
 }
 
 template <class T>
-bool Node<T>::getVisited() { //why can`t i use only visited instead of getVisited(In this case i call !private as public?! field instead method)
+bool Node<T>::getVisited() { 
 	return visited;
 }
 

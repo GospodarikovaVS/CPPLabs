@@ -7,16 +7,13 @@
 template <class T>
 BinaryTree<T>::BinaryTree(Node<T>* r) {
 	this->root = r;
-	curNode = root;
 }
 template <class T>
 BinaryTree<T>::BinaryTree(T r) {
 	this->root = new Node<T>(r);
-	curNode = root;
 }
 template <class T>
 BinaryTree<T>::~BinaryTree() {
-	curNode = nullptr;
 	clearBinaryTree(root);
 }
 template <class T>
@@ -280,75 +277,10 @@ void BinaryTree<T>::addNodeToLeft(Node<T>* n) {
 
 //iterator
 template <class T>
-void BinaryTree<T>::start() {
-	if (curNode->getVisited()) {
-		restartIterations(root);
-	}
-	curNode = root;
-	operator+();
-}
-
-template <class T>
-void BinaryTree<T>::restartIterations(Node<T>* curNode) {
-	curNode->setVisited(false);
-	if (curNode->getLeftNeigh())
-	{
-		restartIterations(curNode->getLeftNeigh());
-	}
-	if (curNode->getRightNeigh()) 
-	{
-		restartIterations(curNode->getRightNeigh());
-	}
-}
-////ops
-template <class T>
-void BinaryTree<T>::operator+() {
-	/*curNode = nullptr;*/
-	if (curNode->getLeftNeigh() 
-		&& !curNode->getLeftNeigh()->getVisited()) {
-		curNode = curNode->getLeftNeigh();
-		operator+();
-	}
-	else if (!curNode->getVisited()) {
-		curNode->setVisited(true);
-	}
-	else if (curNode->getRightNeigh() 
-		&& !curNode->getRightNeigh()->getVisited()) {
-		curNode = curNode->getRightNeigh(); 
-		operator+();
-	}
-	else {
-		curNode = curNode->getParent();
-		if (curNode) {
-			operator+();
-		}
-		
-	}
-}
-template <class T>
-void BinaryTree<T>::operator-() {
-	if(curNode->getRightNeigh()
-		&& curNode->getRightNeigh()->getVisited()) {
-		curNode = curNode->getRightNeigh();
-		operator-();
-	}
-	else if (curNode->getVisited()) {
-		curNode->setVisited(false);
-		curNode = curNode->getLeftNeigh();
-	}
-	else if (curNode->getLeftNeigh()
-		&& curNode->getLeftNeigh()->getVisited()) {
-		curNode = curNode->getLeftNeigh();
-		operator-();
-	}
-	else {
-		curNode = curNode->getParent();
-		operator-();
-	}
-}
-template <class T>
-Node<T>* BinaryTree<T>::operator->() {
-	return curNode;
+Node<T>* BinaryTree<T>::findMostLeft(Node<T>* n) {
+	if (n->getLeftNeigh())
+		return findMostLeft(n->getLeftNeigh());
+	return n;
 }
 
 #endif

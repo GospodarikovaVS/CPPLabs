@@ -33,22 +33,28 @@ int main()
 	}
 	cout << endl;
 	cout << endl;
-	bts.start();
-	cout << bts.operator->()->getValue();
-	bts.operator+();
+	
+	auto it = BinaryTree<string>::Iterator(bts.begin());
+
+	it++;
+	cout << (*it).getValue(); //lll
 	cout << endl;
-	cout << bts.operator->()->getValue();
-	bts.operator-();
+	it++;
+	cout << (*it).getValue(); //ll
 	cout << endl;
-	cout << bts.operator->()->getValue();
+	it--;
 	cout << endl;
 	cout << endl;
-	bts.start();
-	while(bts.operator->()) {
-		cout << bts.operator->()->getValue();
-		bts.operator+();
+	cout << endl;             //lll
+	while (it != nullptr) {
+		cout << (*it).getValue();
+		++it;
 		cout << endl;
 	}
+
+	cout << endl;
+	cout << endl;
+	cout << endl;
 	cout << endl;
 	cout << bts.showAsString();
 
