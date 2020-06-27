@@ -9,4 +9,12 @@ documentation.
 Implement a model of a trade organization with corresponding 
 functionalities and taking into account the words presented in the 
 [task](https://github.com/GospodarikovaVS/CPPLabs/blob/master/Lab2/Task.txt).
-### [WIP: Decision](https://github.com/GospodarikovaVS/CPPLabs/tree/master/Lab2)
+### [Decision](https://github.com/GospodarikovaVS/CPPLabs/tree/master/Lab2)
+
+## Lab3:
+Implement a binary tree with its own iterator.
+### [Decision](https://github.com/GospodarikovaVS/CPPLabs/tree/master/Lab3)
+
+## Lab4:
+Implement a MFC application with multiple document interface. Dictionary, wich can translate a texts from files.
+### [WIP: Decision](https://github.com/GospodarikovaVS/CPPLabs/tree/master/TranslatorApp)
