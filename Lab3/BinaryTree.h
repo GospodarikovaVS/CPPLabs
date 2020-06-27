@@ -48,8 +48,8 @@ public:
 		{ 
 			curNode = n;
 		} //начиная с бегин
-		Node<T>& operator*() {
-			return *curNode;
+		T operator*() {
+			return curNode->getValue();
 		}
 		Node<T>& operator++() {
 			/*curNode = nullptr;*/

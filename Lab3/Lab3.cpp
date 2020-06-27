@@ -37,17 +37,17 @@ int main()
 	auto it = BinaryTree<string>::Iterator(bts.begin());
 
 	it++;
-	cout << (*it).getValue(); //lll
+	cout << (*it); //lll
 	cout << endl;
 	it++;
-	cout << (*it).getValue(); //ll
+	cout << (*it); //ll
 	cout << endl;
 	it--;
 	cout << endl;
 	cout << endl;
 	cout << endl;             //lll
 	while (it != nullptr) {
-		cout << (*it).getValue();
+		cout << (*it);
 		++it;
 		cout << endl;
 	}
